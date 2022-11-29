@@ -45,8 +45,8 @@ GitHub Flavor
 
 1. First li
 1. Second li
-  1. Indented li
-    1. Three columns in li
+   1. Indented li
+      1. Three columns in li
 1. Back to first level li
 
 * Here's *italic* inside li
