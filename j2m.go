@@ -26,7 +26,7 @@ func JiraToMD(str string) string {
 			re: regexp.MustCompile(`(?m)^[ \t]*(#+)\s+`),
 			repl: func(groups []string) string {
 				_, nums := groups[0], groups[1]
-				return strings.Repeat("  ", len(nums)-1) + "1. "
+				return strings.Repeat("   ", len(nums)-1) + "1. "
 			},
 		},
 		{ //Headers 1-6
@@ -70,12 +70,8 @@ func JiraToMD(str string) string {
 			repl: "$1~~$2~~$3",
 		},
 		{ // Code Block
-			re:   regexp.MustCompile(`\{code(:([a-z]+))?([:|]?(title|borderStyle|borderColor|borderWidth|bgColor|titleBGColor)=.+?)*\}`),
-			repl: "```$2",
-		},
-		{ // Code Block End
-			re:   regexp.MustCompile(`{code}`),
-			repl: "```",
+			re:   regexp.MustCompile(`(?m)\{code(:([a-z]+))?([:|]?(title|borderStyle|borderColor|borderWidth|bgColor|titleBGColor)=.+?)*\}([\s\S]*?)\n?\{code\}`),
+			repl: "```$2$5\n```",
 		},
 		{ // Pre-formatted text
 			re:   regexp.MustCompile(`{noformat}`),
@@ -98,11 +94,11 @@ func JiraToMD(str string) string {
 			repl: "> ",
 		},
 		{ // Remove color: unsupported in md
-			re:   regexp.MustCompile(`(?m)\{color:[^}]+\}(.*)\{color\}`),
+			re:   regexp.MustCompile(`(?m)\{color:[^}]+\}([\s\S]*)\{color\}`),
 			repl: "$1",
 		},
 		{ // panel into table
-			re:   regexp.MustCompile(`(?m)\{panel:title=([^}]*)\}\n?(.*?)\n?\{panel\}`),
+			re:   regexp.MustCompile(`(?m)\{panel:title=([^}]*)\}\n?([\s\S]*?)\n?\{panel\}`),
 			repl: "\n| $1 |\n| --- |\n| $2 |",
 		},
 		{ //table header
