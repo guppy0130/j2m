@@ -4,7 +4,7 @@ import (
 	_ "embed"
 	"testing"
 
-	"github.com/StevenACoffman/j2m"
+	"github.com/guppy0130/j2m"
 )
 
 //go:embed j2m.jira
@@ -76,6 +76,11 @@ func TestJiraToMD(t *testing.T) {
 		{
 			name:  "should convert code without line feed before the end code block",
 			input: "{code:java}\njava code{code}",
+			want:  "```java\njava code\n```",
+		},
+		{
+			name:  "should convert code without line feeds",
+			input: "{code:java}java code{code}",
 			want:  "```java\njava code\n```",
 		},
 		{

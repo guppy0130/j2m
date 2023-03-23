@@ -70,8 +70,8 @@ func JiraToMD(str string) string {
 			repl: "$1~~$2~~$3",
 		},
 		{ // Code Block
-			re:   regexp.MustCompile(`(?m)\{code(:([a-z]+))?([:|]?(title|borderStyle|borderColor|borderWidth|bgColor|titleBGColor)=.+?)*\}([\s\S]*?)\n?\{code\}`),
-			repl: "```$2$5\n```",
+			re:   regexp.MustCompile(`(?m)\{code(:([a-z]+))?([:|]?(title|borderStyle|borderColor|borderWidth|bgColor|titleBGColor)=.+?)*\}\n?([\s\S]*?)\n?\{code\}`),
+			repl: "```$2\n$5\n```",
 		},
 		{ // Pre-formatted text
 			re:   regexp.MustCompile(`{noformat}`),

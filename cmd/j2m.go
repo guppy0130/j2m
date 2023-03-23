@@ -1,11 +1,12 @@
-///usr/bin/env go run "$0" "$@" ; exit "$?"
+// /usr/bin/env go run "$0" "$@" ; exit "$?"
 package main
 
 import (
 	"fmt"
-	"github.com/StevenACoffman/j2m"
-	"io/ioutil"
+	"io"
 	"os"
+
+	"github.com/guppy0130/j2m"
 )
 
 // Expects piped input of Jira Markdown, outputs Github Markdown
@@ -20,7 +21,7 @@ func main() {
 	if (stat.Mode() & os.ModeNamedPipe) == 0 {
 		fmt.Println("The command is intended to work with pipes but didn't get one. Assuming empty input")
 	} else {
-		stdInBytes, _ := ioutil.ReadAll(os.Stdin)
+		stdInBytes, _ := io.ReadAll(os.Stdin)
 		str = string(stdInBytes)
 	}
 

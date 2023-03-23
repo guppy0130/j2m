@@ -1,3 +1,3 @@
-module github.com/StevenACoffman/j2m
+module github.com/guppy0130/j2m
 
-go 1.16
+go 1.20
